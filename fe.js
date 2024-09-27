@@ -11,6 +11,10 @@ const getUser = async (userID) => {
   return await getDataFromApi(`/users/${userID}`);
 };
 
+const removeCat = (catsArray, key, value) => {
+  return catsArray.filter((cat) => cat[key] !== value);
+};
+
 //Get the cats
 const getCats = async (user) => {
   let promises = user.cats.map(async (catID) => {
@@ -19,12 +23,14 @@ const getCats = async (user) => {
   });
   return Promise.all(promises);
 };
-
-const readData = async () => {
-  const userData = await getCats(await getUser("123"));
-  console.log(userData);
+const main = async () => {
+  const user = await getUser("123");
+  const cats = await getCats(user);
+  console.log(cats);
+  const newCatArr = removeCat(cats, "name", "Fluffykins");
+  console.log(newCatArr);
 };
-readData();
+main();
 
 //An async forEach function
 async function asyncForEach(array, callback) {
