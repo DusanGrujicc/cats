@@ -14,6 +14,9 @@ const getUser = async (userID) => {
 const removeCat = (catsArray, key, value) => {
   return catsArray.filter((cat) => cat[key] !== value);
 };
+const removeCatsWithKey = (cats, key) => {
+  return cats.filter((cat) => !cat.hasOwnProperty(key));
+};
 
 //Get the cats
 const getCats = async (user) => {
@@ -29,6 +32,8 @@ const main = async () => {
   console.log(cats);
   const newCatArr = removeCat(cats, "name", "Fluffykins");
   console.log(newCatArr);
+  const newCats = removeCatsWithKey(cats, "type");
+  console.log(newCats);
 };
 main();
 
